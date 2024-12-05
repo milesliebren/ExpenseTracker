@@ -18,6 +18,15 @@ namespace ExpenseTracker.Services
             }
         }
 
+        public ExpenseService(string _filePath)
+        {
+            if (File.Exists(_filePath))
+            {
+                File.WriteAllText(_filePath, "[]");
+            }
+            else { throw new FileNotFoundException(); }
+        }
+
         public async Task<List<Expense>> GetAllExpensesAsync()
         {
             var data = await File.ReadAllTextAsync(FilePath);
