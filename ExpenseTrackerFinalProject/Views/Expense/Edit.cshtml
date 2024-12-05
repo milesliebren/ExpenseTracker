@@ -1,0 +1,29 @@
+﻿@model ExpenseTracker.Models.Expense
+
+@{
+    ViewData["Title"] = "Edit Expense";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" name="Id" value="@Model.Id" />
+
+    <div class="form-group">
+        <label for="Description">Description</label>
+        <input type="text" id="Description" name="Description" class="form-control" value="@Model.Description" required />
+    </div>
+    <div class="form-group">
+        <label for="Amount">Amount</label>
+        <input type="number" id="Amount" name="Amount" class="form-control" value="@Model.Amount" required />
+    </div>
+    <div class="form-group">
+        <label for="Date">Date</label>
+        <input type="date" id="Date" name="Date" class="form-control" value="@Model.Date.ToString("yyyy-MM-dd")" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Update Expense</button>
+</form>
+
+<div>
+    <a href="@Url.Action("Index", "Expense")" class="btn btn-secondary">Back to List</a>
+</div>
