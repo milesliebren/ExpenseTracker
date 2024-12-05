@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Expense Tracker</title>
+
+    <!-- Link to global CSS file -->
+    <link rel="stylesheet" href="~/css/styles.css" />
+
+    <!-- Include additional styles for specific views -->
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <div class="container">
+        <!-- Header and Navigation -->
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="@Url.Action("Index", "Expense")">Home</a></li>
+                    <li><a href="@Url.Action("Create", "Expense")">Create Expense</a></li>
+                    <li><a href="@Url.Action("Index", "Expense")">View Expenses</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Main content of the page -->
+        <main>
+            @RenderBody() <!-- Renders the body content of the current view -->
+        </main>
+
+        <!-- Footer (optional) -->
+        <footer>
+            <p>&copy; 2024 Expense Tracker</p>
+        </footer>
+    </div>
+
+    <!-- Include validation scripts -->
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+</body>
+</html>
