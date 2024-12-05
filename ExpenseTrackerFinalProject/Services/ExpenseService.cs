@@ -7,29 +7,26 @@ namespace ExpenseTracker.Services
 {
     public class ExpenseService : IExpenseService
     {
-        private const string FilePath = "expenses.json";
+        private readonly string _filePath;
 
-        public ExpenseService()
+        // Default constructor uses the default file path
+        public ExpenseService() : this("expenses.json") { }
+
+        // Constructor for custom file path (e.g., for testing)
+        public ExpenseService(string filePath)
         {
+            _filePath = filePath;
+
             // Initialize JSON file if not already present
-            if (!File.Exists(FilePath))
-            {
-                File.WriteAllText(FilePath, "[]");
-            }
-        }
-
-        public ExpenseService(string _filePath)
-        {
-            if (File.Exists(_filePath))
+            if (!File.Exists(_filePath))
             {
                 File.WriteAllText(_filePath, "[]");
             }
-            else { throw new FileNotFoundException(); }
         }
 
         public async Task<List<Expense>> GetAllExpensesAsync()
         {
-            var data = await File.ReadAllTextAsync(FilePath);
+            var data = await File.ReadAllTextAsync(_filePath);
             return JsonSerializer.Deserialize<List<Expense>>(data) ?? new List<Expense>();
         }
 
@@ -82,7 +79,7 @@ namespace ExpenseTracker.Services
         private async Task SaveExpensesAsync(List<Expense> expenses)
         {
             var data = JsonSerializer.Serialize(expenses);
-            await File.WriteAllTextAsync(FilePath, data);
+            await File.WriteAllTextAsync(_filePath, data);
         }
     }
 }
