@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "description": "Groceries",
+    "amount": 50.75,
+    "date": "2024-11-30"
+  },
+  {
+    "id": 2,
+    "description": "Dinner with friends",
+    "amount": 120.00,
+    "date": "2024-12-01"
+  },
+  {
+    "id": 3,
+    "description": "Electricity bill",
+    "amount": 85.45,
+    "date": "2024-12-02"
+  },
+  {
+    "id": 4,
+    "description": "Movie tickets",
+    "amount": 30.00,
+    "date": "2024-12-03"
+  }
+]

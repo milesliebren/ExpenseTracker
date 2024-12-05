@@ -1,0 +1,30 @@
+﻿@page
+@using ExpenseTracker.Models
+@using ExpenseTracker.Services.Interfaces
+@inject IExpenseService ExpenseService
+
+<h1>Add Expense</h1>
+<form method="post" onsubmit="return saveExpense();">
+    <input type="text" placeholder="Description" id="description" />
+    <input type="number" placeholder="Amount" id="amount" />
+    <input type="date" id="date" />
+    <button type="submit">Save</button>
+</form>
+
+<script>
+    async function saveExpense() {
+        const expense = {
+            description: document.getElementById('description').value,
+            amount: parseFloat(document.getElementById('amount').value),
+            date: new Date(document.getElementById('date').value).toISOString()
+        };
+
+        await fetch('/api/expenses', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(expense)
+        });
+
+        return false; // Prevent page reload
+    }
+</script>

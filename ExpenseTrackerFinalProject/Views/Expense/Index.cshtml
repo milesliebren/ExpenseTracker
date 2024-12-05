@@ -1,0 +1,52 @@
+﻿@page
+@model IEnumerable<ExpenseTracker.Models.Expense>
+
+@{
+    ViewData["Title"] = "Expenses";
+}
+
+<h1>Expense Tracker</h1>
+
+<!-- Display Expenses -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var expense in Model)
+        {
+            <tr>
+                <td>@expense.Id</td>
+                <td>@expense.Description</td>
+                <td>@expense.Amount.ToString("C")</td>
+                <td>@expense.Date.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<hr />
+
+<!-- Add New Expense -->
+<h2>Add New Expense</h2>
+<form method="post" asp-controller="Expense" asp-action="AddExpense">
+    <div class="form-group">
+        <label for="Description">Description</label>
+        <input type="text" class="form-control" id="Description" name="Description" required />
+    </div>
+    <div class="form-group">
+        <label for="Amount">Amount</label>
+        <input type="number" step="0.01" class="form-control" id="Amount" name="Amount" required />
+    </div>
+    <div class="form-group">
+        <label for="Date">Date</label>
+        <input type="date" class="form-control" id="Date" name="Date" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Add Expense</button>
+</form>
+
