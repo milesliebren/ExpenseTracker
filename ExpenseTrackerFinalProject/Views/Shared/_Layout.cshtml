@@ -35,6 +35,9 @@
         </footer>
     </div>
 
+    <!-- Render the Scripts section if defined -->
+    @RenderSection("Scripts", required: false)
+
     <!-- Include validation scripts -->
     @await Html.PartialAsync("_ValidationScriptsPartial")
 </body>
