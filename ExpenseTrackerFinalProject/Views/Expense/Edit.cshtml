@@ -12,14 +12,17 @@
     <div class="form-group">
         <label for="Description">Description</label>
         <input type="text" id="Description" name="Description" class="form-control" value="@Model.Description" required />
+        <span class="text-danger">@Html.ValidationMessageFor(m => m.Description)</span>
     </div>
     <div class="form-group">
-        <label for="Amount">Amount</label>
-        <input type="number" id="Amount" name="Amount" class="form-control" value="@Model.Amount" required />
+        <label for="Amount">Amount (USD)</label>
+        <input type="text" id="Amount" name="Amount" class="form-control" value="@Model.Amount" required />
+        <span class="text-danger">@Html.ValidationMessageFor(m => m.Amount)</span>
     </div>
     <div class="form-group">
         <label for="Date">Date</label>
         <input type="date" id="Date" name="Date" class="form-control" value="@Model.Date.ToString("yyyy-MM-dd")" required />
+        <span class="text-danger">@Html.ValidationMessageFor(m => m.Date)</span>
     </div>
     <button type="submit" class="btn btn-primary">Update Expense</button>
 </form>
@@ -27,3 +30,9 @@
 <div>
     <a href="@Url.Action("Index", "Expense")" class="btn btn-secondary">Back to List</a>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
