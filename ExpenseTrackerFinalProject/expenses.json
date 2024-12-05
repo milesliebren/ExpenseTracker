@@ -1,1 +1,15 @@
-[{"Id":0,"Description":null,"Amount":0,"Date":"0001-01-01T00:00:00"},{"Id":1,"Description":"popp[","Amount":100,"Date":"2024-12-19T00:00:00"}]
+[
+  {
+    "Id": 0,
+    "Description": "Bank Hiest Prep Gear",
+    "Amount": 300.54,
+    "Date": "2024-12-19T00:00:00"
+  },
+
+  {
+    "Id": 1,
+    "Description": "Court Settlement From Bank Heist",
+    "Amount": 300000000,
+    "Date": "2024-12-19T00:00:00"
+  }
+]
