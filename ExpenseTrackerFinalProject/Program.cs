@@ -2,7 +2,6 @@ using ExpenseTracker.Models;
 using ExpenseTracker.Repositories;
 using ExpenseTracker.Services;
 using ExpenseTracker.Services.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,12 +28,12 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
 
-// Map the default route to HomeController's Index action
+// Define the default route (this ensures the controller can be reached)
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Expense}/{action=Index}/{id?}"); // Default route points to ExpenseController and its Index method
 
-// Map the controller to specific actions
+// Map the controller to specific actions (this is for API endpoints)
 app.MapControllers();
 
 app.Run();

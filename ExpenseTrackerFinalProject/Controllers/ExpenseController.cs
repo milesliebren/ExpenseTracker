@@ -2,10 +2,8 @@
 using ExpenseTracker.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ExpenseTracker.UI.Controllers
+namespace ExpenseTracker.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
     public class ExpenseController : Controller
     {
         private readonly IExpenseService _expenseService;
@@ -16,11 +14,8 @@ namespace ExpenseTracker.UI.Controllers
             _expenseService = expenseService;
         }
 
-        /// <summary>
-        /// Get all expenses.
-        /// </summary>
-        /// <returns>A list of all expenses.</returns>
-        [HttpGet]
+        // API endpoint to get all expenses
+        [HttpGet("api/expenses")]
         public async Task<IActionResult> GetAllExpenses()
         {
             try
@@ -34,12 +29,8 @@ namespace ExpenseTracker.UI.Controllers
             }
         }
 
-        /// <summary>
-        /// Get a single expense by ID.
-        /// </summary>
-        /// <param name="id">The ID of the expense.</param>
-        /// <returns>The expense if found.</returns>
-        [HttpGet("{id:int}")]
+        // API endpoint to get an expense by its ID
+        [HttpGet("api/expenses/{id:int}")]
         public async Task<IActionResult> GetExpenseById(int id)
         {
             try
@@ -57,12 +48,8 @@ namespace ExpenseTracker.UI.Controllers
             }
         }
 
-        /// <summary>
-        /// Add a new expense.
-        /// </summary>
-        /// <param name="expense">The expense data to add.</param>
-        /// <returns>The created expense.</returns>
-        [HttpPost]
+        // API endpoint to add a new expense
+        [HttpPost("api/expenses")]
         public async Task<IActionResult> AddExpense([FromBody] Expense expense)
         {
             try
@@ -83,13 +70,8 @@ namespace ExpenseTracker.UI.Controllers
             }
         }
 
-        /// <summary>
-        /// Update an existing expense.
-        /// </summary>
-        /// <param name="id">The ID of the expense to update.</param>
-        /// <param name="expense">The updated expense data.</param>
-        /// <returns>The updated expense.</returns>
-        [HttpPut("{id:int}")]
+        // API endpoint to update an expense
+        [HttpPut("api/expenses/{id:int}")]
         public async Task<IActionResult> UpdateExpense(int id, [FromBody] Expense expense)
         {
             try
@@ -113,12 +95,8 @@ namespace ExpenseTracker.UI.Controllers
             }
         }
 
-        /// <summary>
-        /// Delete an expense by ID.
-        /// </summary>
-        /// <param name="id">The ID of the expense to delete.</param>
-        /// <returns>No content if successful.</returns>
-        [HttpDelete("{id:int}")]
+        // API endpoint to delete an expense
+        [HttpDelete("api/expenses/{id:int}")]
         public async Task<IActionResult> DeleteExpense(int id)
         {
             try
@@ -136,11 +114,11 @@ namespace ExpenseTracker.UI.Controllers
             }
         }
 
-        // Index action method to load the view
+        // MVC action method to load the Index view
         public async Task<IActionResult> Index()
         {
             var expenses = await _expenseService.GetAllExpensesAsync();
-            return View(expenses); // Returns the Index view with the list of expenses
+            return View(expenses); // Return the Index view with the list of expenses
         }
     }
 }
