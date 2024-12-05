@@ -7,21 +7,19 @@
 <h1>@ViewData["Title"]</h1>
 
 <form asp-action="Create" method="post">
-    <input type="hidden" name="Id" value="@Model.Id" />
-
     <div class="form-group">
         <label for="Description">Description</label>
-        <input type="text" id="Description" name="Description" class="form-control" value="@Model.Description" required />
+        <input type="text" id="Description" name="Description" class="form-control" value="@Model?.Description" />
         <span class="text-danger">@Html.ValidationMessageFor(m => m.Description)</span>
     </div>
     <div class="form-group">
         <label for="Amount">Amount (USD)</label>
-        <input type="text" id="Amount" name="Amount" class="form-control" value="@Model.Amount" required />
+        <input type="text" id="Amount" name="Amount" class="form-control" value="@Model?.Amount" />
         <span class="text-danger">@Html.ValidationMessageFor(m => m.Amount)</span>
     </div>
     <div class="form-group">
         <label for="Date">Date</label>
-        <input type="date" id="Date" name="Date" class="form-control" value="@Model.Date.ToString("yyyy-MM-dd")" required />
+        <input type="date" id="Date" name="Date" class="form-control" value="@Model?.Date.ToString("yyyy-MM-dd")" />
         <span class="text-danger">@Html.ValidationMessageFor(m => m.Date)</span>
     </div>
     <button type="submit" class="btn btn-success">Add Expense</button>

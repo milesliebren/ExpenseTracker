@@ -28,12 +28,12 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
 
-// Define the default route (this ensures the controller can be reached)
+// Map the default route to ExpenseController's Index action
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Expense}/{action=Index}/{id?}"); // Default route points to ExpenseController and its Index method
+    pattern: "{controller=Expense}/{action=Index}/{id?}");
 
-// Map the controller to specific actions (this is for API endpoints)
+// Map the controller to specific actions
 app.MapControllers();
 
 app.Run();

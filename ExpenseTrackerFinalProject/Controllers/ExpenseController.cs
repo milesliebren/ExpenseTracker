@@ -21,9 +21,9 @@ namespace ExpenseTracker.Controllers
             return View(expenses); // Return the Index view with the list of expenses
         }
 
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
-            return View();
+            return View(); // Returns the empty form for creating an expense
         }
 
         [HttpPost]
@@ -31,9 +31,12 @@ namespace ExpenseTracker.Controllers
         {
             if (ModelState.IsValid)
             {
+                // If the model is valid, create the expense
                 var createdExpense = await _expenseService.AddExpenseAsync(expense);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index"); // Redirect to Index after successful creation
             }
+
+            // If the model is invalid, re-render the form with validation errors
             return View(expense);
         }
 

@@ -33,11 +33,12 @@ namespace ExpenseTracker.Services
         public async Task<Expense> AddExpenseAsync(Expense expense)
         {
             var expenses = await GetAllExpensesAsync();
-            expense.Id = expenses.Any() ? expenses.Max(e => e.Id) + 1 : 1; // Generate new ID
-            expenses.Add(expense);
+            expense.Id = expenses.Any() ? expenses.Max(e => e.Id) + 1 : 1; // Generate new ID for new expense
 
-            await SaveExpensesAsync(expenses);
-            return expense;
+            expenses.Add(expense); // Add the expense to the list
+
+            await SaveExpensesAsync(expenses); // Save the list of expenses (simulate saving to storage)
+            return expense; // Return the added expense
         }
 
         public async Task<Expense?> UpdateExpenseAsync(Expense updatedExpense)
