@@ -1,14 +1,18 @@
+using ExpenseTracker.Models;
+using ExpenseTracker.Repositories;
 using ExpenseTracker.Services;
 using ExpenseTracker.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews(); // Enable MVC with Razor views
+// Register services for Dependency Injection
+builder.Services.AddControllersWithViews(); // Add MVC with Razor Views
 
-// Dependency Injection
+// Add the necessary services for Expense tracking
 builder.Services.AddScoped<IExpenseService, ExpenseService>();
 builder.Services.Decorate<IExpenseService, ExpenseServiceDecorator>();
+builder.Services.AddSingleton<ExpenseRepository>();
 
 var app = builder.Build();
 
@@ -23,12 +27,14 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
 app.UseAuthorization();
 
-// Map controllers
+// Map the default route to HomeController's Index action
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Expense}/{action=Index}/{id?}");
+    pattern: "{controller=Expense}/{action=Index}/{id?}"); // Default route points to ExpenseController and its Index method
+
+// Map the controller to specific actions
+app.MapControllers();
 
 app.Run();

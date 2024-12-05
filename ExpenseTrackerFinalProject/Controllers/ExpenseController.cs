@@ -6,7 +6,7 @@ namespace ExpenseTracker.UI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ExpenseController : ControllerBase
+    public class ExpenseController : Controller
     {
         private readonly IExpenseService _expenseService;
 
@@ -134,6 +134,13 @@ namespace ExpenseTracker.UI.Controllers
             {
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
+        }
+
+        // Index action method to load the view
+        public async Task<IActionResult> Index()
+        {
+            var expenses = await _expenseService.GetAllExpensesAsync();
+            return View(expenses); // Returns the Index view with the list of expenses
         }
     }
 }
